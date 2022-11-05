@@ -1,0 +1,51 @@
+Api usando FastApi: https://fastapi.tiangolo.com/
+
+FastApi é focado em performance, é no caso a melhor opção para criar API em Python, é muito veloz e eficiente
+Ele cria uma documentação interativa da API automaticamente em http://localhost:8000/docs
+
+Iniciando...
+
+libs:
+
+pip install fastapi[all]
+pip install uvicorn  - (nosso servidor local)
+
+rodando o server:
+python -m uvicorn main:app --reload
+
+Dica, deixar endpoints com métodos async, pare ele ser executado apenas se uma determinada ação ocorrer.
+
+Criando rotas/Métodos HTTP:
+
+@app.get("/") #@ = decorator
+async def home():
+    return {"Vendas": len(vendas)}
+
+@app.get("/vendas/{id_venda}")
+async def get_sale(id_venda: int): # recebendo parâmetro e passando sua tipagem
+    if id_venda in vendas:
+         return vendas[id_venda]
+    else:
+        return {"Erro": "ID da venda inexistente!"}
+
+@app.put("/update/{id_venda}")
+async def update_Item(id_venda: int, item: ItemForSale):
+    return {"Name_item": item.name_item, "Preco_unitario": item.preco_unitario, "Quantidade": item.quantidade}
+   
+
+curso no yt: https://www.youtube.com/watch?v=Hx6w7JXYHbY&list=PLuhCJtW2i-wKK9HjfYJI4RIcd9AMIi88k
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="localhost", port=8000)
+
+O comando acima serve para toda vez que rodamos um arquivo main com python main.py ele vai rodar o uvicorn no localhost na porta 8000
+
+
+
+
+
+
+
+
+
+
